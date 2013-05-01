@@ -43,17 +43,13 @@
 (setq x-select-enable-clipboard t)
 
 ; ==================== Indentation =======================
-(setq tab-width 4
-      c-default-style "k&r"
-      c-block-comment-prefix ""
-      c-basic-offset 4)
-(setq truncate-lines t)
-(set-language-environment "UTF-8")
-
 (setq rest-basic-offset 4)
 
-;(setq default-indent-tabs-mode nil)
-;(setq default-tab-width 4)
+(setq c-default-style "linux" c-basic-offset 4)
+
+(setq default-indent-tabs-mode t)
+(setq default-tab-width 4)
+;(setq indent-line-function 'insert-tab)
 ;(setq tab-width 4)
 
 ;(setq truncate-lines t)
