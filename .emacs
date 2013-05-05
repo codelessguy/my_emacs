@@ -120,6 +120,77 @@
 ;       )
 ;      )
 
+; ===================== File Finder =======================
+(defun geosoft-parse-minibuffer ()
+  ;; Extension to the complete word facility of the minibuffer
+  (interactive)
+  (backward-char 4)
+  (setq found t)
+  (cond
+     ; local directories
+     ((looking-at ".c") (setq directory "~"))
+     ((looking-at ".rst") (setq directory "~"))
+     (t (setq found nil)))
+  (cond (found (beginning-of-line)
+                (kill-line)
+                (insert directory))
+         (t     (forward-char 4)
+                (minibuffer-complete)))) 
+
+(define-key minibuffer-local-completion-map " " 'geosoft-parse-minibuffer) 
+
+; ====================== Buffer Switcher ==========================
+(defvar LIMIT 1)
+(defvar time 0)
+(defvar mylist nil)
+
+(defun time-now ()
+   (car (cdr (current-time))))
+
+(defun bubble-buffer ()
+   (interactive)
+   (if (or (> (- (time-now) time) LIMIT) (null mylist))
+       (progn (setq mylist (copy-alist (buffer-list)))
+          (delq (get-buffer " *Minibuf-0*") mylist)
+          (delq (get-buffer " *Minibuf-1*") mylist)))
+   (bury-buffer (car mylist))
+   (setq mylist (cdr mylist))
+   (setq newtop (car mylist))
+   (switch-to-buffer (car mylist))
+   (setq rest (cdr (copy-alist mylist)))
+   (while rest
+     (bury-buffer (car rest))
+     (setq rest (cdr rest)))
+   (setq time (time-now))) 
+
+(defun geosoft-kill-buffer ()
+   ;; Kill default buffer without the extra emacs questions
+   (interactive)
+   (kill-buffer (buffer-name))
+   (set-name)) 
+
+; ===================== Buffer Navigator ===================
+(defun geosoft-forward-word ()
+   ;; Move one word forward. Leave the pointer at start of word
+   ;; instead of emacs default end of word. Treat _ as part of word
+   (interactive)
+   (forward-char 1)
+   (backward-word 1)
+   (forward-word 2)
+   (backward-word 1)
+   (backward-char 1)
+   (cond ((looking-at "_") (forward-char 1) (geosoft-forward-word))
+         (t (forward-char 1))))
+
+(defun geosoft-backward-word ()
+   ;; Move one word backward. Leave the pointer at start of word
+   ;; Treat _ as part of word
+   (interactive)
+   (backward-word 1)
+   (backward-char 1)
+   (cond ((looking-at "_") (geosoft-backward-word))
+         (t (forward-char 1))))
+
 ;================== Auto Complete ======================
 (add-to-list 'load-path "~/.emacs.d")    ; This may not be appeared if you have already added.
 (load-file "~/.emacs.d/auto-complete.el")
@@ -175,7 +246,6 @@
 ; delete-window : C-x 0
 
 (global-set-key [f4] 'blank-mode)
-
 
 ; Buffer Switcher
 ;(global-set-key [f4] 'bubble-buffer)
