@@ -183,6 +183,8 @@
 ;; ac-source-gtags
 (my-ac-config)
 
+(require 'blank-mode)
+
 ; =================== Bind =======================================
 (global-set-key [kp-home]  'beginning-of-buffer) ; [Home]
 (global-set-key [home]     'beginning-of-buffer) ; [Home]
@@ -200,6 +202,8 @@
 (global-set-key [f2] 'split-window-vertically)
 ;(global-set-key [f4] 'delete-window)
 ; delete-window : C-x 0
+
+(global-set-key [f4] 'blank-mode)
 
 ; Buffer Switcher
 ;(global-set-key [f4] 'bubble-buffer)
