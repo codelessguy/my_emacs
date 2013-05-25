@@ -120,6 +120,36 @@
 ;       )
 ;      )
 
+; ====================== Buffer Switcher ==========================
+(defvar LIMIT 1)
+(defvar time 0)
+(defvar mylist nil)
+
+(defun time-now ()
+   (car (cdr (current-time))))
+
+(defun bubble-buffer ()
+   (interactive)
+   (if (or (> (- (time-now) time) LIMIT) (null mylist))
+       (progn (setq mylist (copy-alist (buffer-list)))
+          (delq (get-buffer " *Minibuf-0*") mylist)
+          (delq (get-buffer " *Minibuf-1*") mylist)))
+   (bury-buffer (car mylist))
+   (setq mylist (cdr mylist))
+   (setq newtop (car mylist))
+   (switch-to-buffer (car mylist))
+   (setq rest (cdr (copy-alist mylist)))
+   (while rest
+     (bury-buffer (car rest))
+     (setq rest (cdr rest)))
+   (setq time (time-now)))
+
+(defun geosoft-kill-buffer ()
+   ;; Kill default buffer without the extra emacs questions
+   (interactive)
+   (kill-buffer (buffer-name))
+   (set-name))
+
 ;================== Auto Complete ======================
 (add-to-list 'load-path "~/.emacs.d")    ; This may not be appeared if you have already added.
 (load-file "~/.emacs.d/auto-complete.el")
