@@ -86,9 +86,9 @@
 ;(require 'hideshowvis)
 
 ;========================= QML ==================================
-;(load-file "~/.emacs.d/plugins/qml-mode.el")
-;(require 'qml-mode)
-;(setq auto-mode-alist (cons '("\\.qml$" . qml-mode) auto-mode-alist))
+(load-file "~/.emacs.d/plugins/qml-mode.el")
+(require 'qml-mode)
+(setq auto-mode-alist (cons '("\\.qml$" . qml-mode) auto-mode-alist))
 
 ; ====================== Themes ==================================
 ;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
