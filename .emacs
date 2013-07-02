@@ -42,6 +42,10 @@
 ; enable copy/paste between X
 (setq x-select-enable-clipboard t)
 
+
+; refresh buffer automatically when using git for example
+(global-auto-revert-mode t)
+
 ; ==================== Indentation =======================
 (setq rest-basic-offset 4)
 
@@ -206,6 +210,7 @@
 (require 'blank-mode)
 
 ; ===================== auto-complete-clang ==========================
+; install: sudo apt-get install clang
 (load-file "~/.emacs.d/plugins/auto-complete-clang.el")
 (require 'auto-complete-clang)
  
@@ -213,6 +218,7 @@
 (setq ac-quick-help-delay 0.5)
 (ac-set-trigger-key "TAB")
 ;(define-key ac-mode-map  [(control tab)] 'auto-complete)
+(global-set-key (kbd "C-`") 'ac-complete-clang)
 (defun my-ac-config ()
   (setq ac-clang-flags (split-string "-I/usr/include/c++/4.5 -I/usr/include -I/usr/local/include"))
   (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
