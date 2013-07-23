@@ -42,9 +42,11 @@
 ; enable copy/paste between X
 (setq x-select-enable-clipboard t)
 
-
 ; refresh buffer automatically when using git for example
 (global-auto-revert-mode t)
+
+; disable copy when highlight something
+(setq mouse-drag-copy-region nil)
 
 ; ==================== Indentation =======================
 (setq rest-basic-offset 4)
