@@ -317,6 +317,8 @@
 ;; Reload current buffer
 ;; C-x C-v
 
+;; reload emacs config
+;; M-x eval-buffer
 
 ;; *** CTAGS ***
 ;; search for files (generate TAGS file): find . -type f -iname "*.[chS]" | xargs etags -a
