@@ -316,3 +316,11 @@
 
 ;; Reload current buffer
 ;; C-x C-v
+
+
+;; *** CTAGS ***
+;; search for files (generate TAGS file): find . -type f -iname "*.[chS]" | xargs etags -a
+;; M-. <RET> : Jump to the tag underneath the cursor
+;; M-. <tag> <RET> : Search for a particular tag
+;; C-u M-. : Find the next definition for the last tag
+;; M-* : Pop back to where you previously invoked "M-."
