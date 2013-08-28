@@ -324,7 +324,7 @@
 ;;help on shortcut : C-h k <shortcut>
 
 ;; C-k : delete a line from the cursor to \n
-(global-set-key [M-kp-subtract] 'kill-whole-line)
+(global-set-key [C-kp-subtract] 'kill-whole-line)
 ;; M-d : delete a word
 
 ;; Reload current buffer
