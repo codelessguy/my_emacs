@@ -49,17 +49,22 @@
 (setq mouse-drag-copy-region nil)
 
 ; ==================== Indentation =======================
-(setq rest-basic-offset 4)
+;(setq rest-basic-offset 4)
 
 (setq c-default-style "linux" c-basic-offset 4)
 
-(setq default-indent-tabs-mode t)
+;(setq default-indent-tabs-mode t)
 (setq default-tab-width 4)
-;(setq indent-line-function 'insert-tab)
-;(setq tab-width 4)
+(setq indent-line-function 'insert-tab)
 
 ;(setq truncate-lines t)
 ;(set-language-environment "UTF-8")
+
+;; load smart tabs
+;(load "~/.emacs.d/smart-tabs-mode")
+
+;; use smart tabs for all the predefined languages
+;(smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python 'ruby 'nxml)
 
 ; ======================= Item displayed  ========================
 ;(menu-bar-mode -1)
@@ -236,6 +241,14 @@
 ;; ac-source-gtags
 (my-ac-config)
 
+; =======================================================
+(defun switch-to-minibuffer-window ()
+  "switch to minibuffer window (if active)"
+  (interactive)
+  (when (active-minibuffer-window)
+    (select-window (active-minibuffer-window))))
+(global-set-key (kbd "<f7>") 'switch-to-minibuffer-window)
+
 ; =================== Bind =======================================
 (global-set-key [kp-home]  'beginning-of-buffer) ; [Home]
 (global-set-key [home]     'beginning-of-buffer) ; [Home]
@@ -311,7 +324,7 @@
 ;;help on shortcut : C-h k <shortcut>
 
 ;; C-k : delete a line from the cursor to \n
-(global-set-key "\C-x\C-k" 'kill-whole-line)
+(global-set-key [M-kp-subtract] 'kill-whole-line)
 ;; M-d : delete a word
 
 ;; Reload current buffer
